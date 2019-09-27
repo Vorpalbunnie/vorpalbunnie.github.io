@@ -3,3 +3,11 @@ window.onload = function () {
   console.log("success")
 }
   document.onload = function () {console.log("docLoaded")}
+
+mason = function () {
+  console.log("yuh yuh");
+}
+
+mason2 = function () {
+  console.log("yee yuh");
+}
