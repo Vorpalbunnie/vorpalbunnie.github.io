@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+
+<button onclick=makeRequest("test-button") id="test-button">Push me bro</button>
+
+<p id="paragraph"> Placeholder </p>
+
+<script>
+var request = require('request');
+
+var testResult;
+/**
+var apiKey = "YOUR-API-KEY-HERE";
+
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/", true);
+xhr.setRequestHeader("X-API-Key", apiKey);
+
+xhr.onreadystatechange = function(){
+ if(this.readyState === 4 && this.status === 200){
+  var json = JSON.parse(this.responseText);
+  console.log(json.Response.data.inventoryItem.itemName); //Gjallarhorn
+ }
+}
+
+xhr.send();
+*/
+
+var configSettings = {
+	apiKey: '4e04440a43d34b23a4891f3164ef7d4d',  // <-- Add your Bungie API Key here.
+	authURL: 'https://www.bungie.net/en/OAuth/Authorize/33692', // <-- Add your Authorization URL here.
+	originHeader: 'https://vorpalbunnie.github.io/', // <-- Add your origin header value here.
+}
+
+var baseRequest = request.defaults({headers: {'X-API-Key':configSettings.apiKey}});
+
+
+
+function UserAction(button) {
+    var xhttp = new XMLHttpRequest();
+    var URL = getURL(button);
+    xhttp.open("GET", configSettings.authURL, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(null);
+    testResult = xhttp;
+    console.log(xhttp);
+    document.getElementById("paragraph").innerHTML = xhttp.responseText;
+}
+
+function getURL(button){
+  switch(button){
+    case "test-button":
+      return "https://www.bungie.net/platform/Destiny/Manifest/InventoryItem/1274330687/";
+    default:
+     return "https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/6708842102/";
+  
+  }
+
+}
+
+
+</script>
+
+</body>
+</html>
+
+
