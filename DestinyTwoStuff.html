@@ -43,7 +43,7 @@ function makeRequest(button) {
 	var xhttp = new XMLHttpRequest();
 	var URL = getURL(button);
 	xhttp.open("GET", URL, true);
-	xhttp.setRequestHeader('X-API-Key':configSettings.apiKey);
+	xhttp.setRequestHeader('X-API-Key', configSettings.apiKey);
 	xhttp.setRequestHeader("Content-type", "application/json");
 	xhttp.send(null);
 	testResult = xhttp;
