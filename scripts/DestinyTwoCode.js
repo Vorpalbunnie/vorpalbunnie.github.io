@@ -118,6 +118,3 @@ function getURL(button){
   };
 
 };
-
-
-</script>
