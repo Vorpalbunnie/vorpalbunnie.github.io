@@ -44,8 +44,11 @@ function makeRequest(button) {
 	console.log(xhttp);
 	document.getElementById("paragraph").innerHTML = xhttp.responseText;
 };
-var manifest;
-var en_path;
+var manifest_json;
+var manifest_mobile;
+var en_path_json;
+var en_path_mobile;
+
 function manifestButton(){
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("GET", 'https://www.bungie.net/Platform/Destiny2/Manifest/', true);
@@ -55,16 +58,16 @@ function manifestButton(){
  		if(this.readyState === 4 && this.status === 200){
  			var json = JSON.parse(this.responseText);
 			console.log(json);
-			en_path = json.Response.jsonWorldContentPaths.en;
-  			console.log(en_path);
+			en_path_json = json.Response.jsonWorldContentPaths.en;
+  			console.log(en_path_json);
 			//console.log(json.Response.data.inventoryItem.itemName); //Gjallarhorn
  		}
 	}
 }
 
-function getManifest(){
+function getManifestJson(){
 
-	let outStream = fs.createWriteStream('manifest.zip');
+	let outStream = fs.createWriteStream('manifest_json.zip');
 
 	request(options)
 	.on('response', function(res, body){
@@ -72,12 +75,12 @@ function getManifest(){
 	}).pipe(outStream)
 	.on('finish', function(){
 		let zip = new SZIP({
-			file: './manifest.zip',
+			file: './manifest_json.zip',
 			storeEntries: true
 		});
 
 		zip.on('ready', function(){
-			zip.extract(en_path, './manifest.content', function(err,count){
+			zip.extract(en_path_json, './manifest_json.content', function(err,count){
 				if(err) console.log(err);
 			});
 		});
@@ -88,8 +91,8 @@ function getManifest(){
 //queries manifes.content, can be modified to accept parameters
 //mostly just to demo that this can use the .content file 
 //as a sqlite db for queries
-function queryManifest(){
-	let db = new sqlite.Database('manifest.content');
+function queryManifestJson(){
+	let db = new sqlite.Database('manifest_json.content');
 
 
 	db.serialize(function(){
@@ -103,6 +106,9 @@ function queryManifest(){
 		});
 	});
 }
+
+
+
 function getURL(button){
   switch(button){
     case "test-button":
