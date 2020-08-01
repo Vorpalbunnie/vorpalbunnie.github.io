@@ -7,6 +7,20 @@ let defs = require('./table.json');
 
 var testResult;
 /**
+To-Do: Add Node or whatever so that we can use the "require" calls above
+
+Parse the manifest for what the weekly ordeal is
+
+Create a data structure to store which factions have which champions, which factions have which shield types, and which strikes have which factions
+
+Finally, output what is needed for this week! :D
+
+
+*/
+
+
+
+/**
 var apiKey = "YOUR-API-KEY-HERE";
 
 var xhr = new XMLHttpRequest();
